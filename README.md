@@ -1,5 +1,7 @@
 # CloudWatch Error Search - CloudShell Package
 
+❗❗ IMPORTANT: This is to collect data from us-east-1  ❗❗
+
 ## 📦 What's Inside
 
 This package contains everything you need to search CloudWatch logs using AWS CloudShell - **no local installation required!**
