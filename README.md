@@ -110,7 +110,7 @@ jq -r '.[] | .logStreamName' $TEMP_DIR/all_errors.json 2>/dev/null | \
 
 It shows we had 56 EC2's and 9 Containers running during the outage.  There is a file that lists the id's of each of them so you can get the instance type details that we can send to AWS.
 
-'''bash
+```bash
 CloudWatch Error Search Summary
 ================================
 Date: Sat Nov  8 03:34:05 PM UTC 2025
@@ -138,7 +138,7 @@ LogStream Pattern Examples:
        pattern: */*/32-char-hex-task-id
 
 
-'''
+```
 
 
 ---
