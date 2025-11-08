@@ -105,6 +105,42 @@ jq -r '.[] | .logStreamName' $TEMP_DIR/all_errors.json 2>/dev/null | \
     sort -u >> $TEMP_DIR/ecs_task_ids.txt
 ```
 
+
+## Here is the sample of the output from an account stored in SUMMARY.TXT file.
+
+It shows we had 56 EC2's and 9 Containers running during the outage.  There is a file that lists the id's of each of them so you can get the instance type details that we can send to AWS.
+
+'''bash
+CloudWatch Error Search Summary
+================================
+Date: Sat Nov  8 03:34:05 PM UTC 2025
+Time Range: Oct 20, 2025 4:00 AM - 12:00 PM ET
+UTC Range: 2025-10-20T08:00:00Z to 2025-10-20T16:00:00Z
+Search ID: 20251108_060141
+
+Search Results
+--------------
+Log Groups Searched: 114
+Total Error Events Found: 0
+Unique Log Streams with Errors: 144
+  - HTTP 500 errors: 42318
+  - Timeout errors: 2299
+
+AWS Resources Affected (extracted from logStream names)
+--------------------------------------------------------
+EC2 Instances: 56
+ECS Tasks/Containers: 9
+
+LogStream Pattern Examples:
+- EC2: eventlog-application-app-i-0150b6dd2ed5f361c
+       pattern: *-i-xxxxxxxxxxxxxxxxx
+- ECS: jfi-prod-eft-ecs-logs/frontend/8e078702cf614e3a9426dafeaba23394
+       pattern: */*/32-char-hex-task-id
+
+
+'''
+
+
 ---
 
 ## ✨ Why CloudShell?
