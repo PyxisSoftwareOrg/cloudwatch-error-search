@@ -301,11 +301,15 @@ if [ -n "$BATCH_FILES" ]; then
         
         # Download this batch
         aws s3 cp s3://$BUCKET_NAME/$S3_PREFIX/batches/$BATCH $TEMP_DIR/batch.json --quiet
-        
-        # Append to all_errors using jq
-        jq -s '.[0] + .[1]' $TEMP_DIR/all_errors.json $TEMP_DIR/batch.json > $TEMP_DIR/merged.json
+
+        # Append to all_errors using streaming approach (memory efficient)
+        # Remove closing bracket from all_errors, append batch content, add closing bracket
+        head -n -1 $TEMP_DIR/all_errors.json > $TEMP_DIR/merged.json
+        echo "," >> $TEMP_DIR/merged.json
+        tail -n +2 $TEMP_DIR/batch.json | head -n -1 >> $TEMP_DIR/merged.json
+        echo "]" >> $TEMP_DIR/merged.json
         mv $TEMP_DIR/merged.json $TEMP_DIR/all_errors.json
-        
+
         rm $TEMP_DIR/batch.json
     done
     echo ""
